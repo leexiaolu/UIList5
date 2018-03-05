@@ -73,7 +73,7 @@ public class ToastActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.view_toast_custom,
                 (ViewGroup) findViewById(R.id.lly_toast));
-        ImageView img_logo = (ImageView) view.findViewById(R.id.img_logo);
+        ImageView img_logo = (ImageView) view.findViewById(R.id.img_logo);    //可以动态设置图片
         TextView tv_msg = (TextView) view.findViewById(R.id.tv_msg);
         tv_msg.setText(str);
         Toast toast = new Toast(context);
