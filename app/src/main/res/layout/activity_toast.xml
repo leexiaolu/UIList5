@@ -4,32 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.leesnriud.uilist5.MainActivity">
+    tools:context="com.example.leesnriud.uilist5.ToastActivity">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
         <Button
-            android:id="@+id/bt_toast"
-            android:text="toast"
+            android:id="@+id/bt_toast1"
+            android:text="普通toast"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/bt_dialog"
-            android:text="dialog"
+            android:id="@+id/bt_toast2"
+            android:text="普通toast修改字体"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
         <Button
-            android:id="@+id/bt_popupwindow"
-            android:text="popupwindow"
+            android:id="@+id/bt_toast3"
+            android:text="自定义图片toast"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_toast4"
+            android:text="全部自定义toast"
             android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     </LinearLayout>
-
 </android.support.constraint.ConstraintLayout>
