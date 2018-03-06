@@ -43,7 +43,7 @@ public class DialogActivity extends AppCompatActivity {
                 showOrdinaryDialog();
                 break;
             case R.id.bt_dialog2:
-
+                commonListDialog();
                 break;
             case R.id.bt_dialog3:
 
