@@ -49,6 +49,7 @@ public class DialogActivity extends AppCompatActivity {
 
                 break;
             case R.id.bt_dialog4:
+
                 break;
             case R.id.bt_dialog5:
                 break;
