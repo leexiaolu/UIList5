@@ -92,4 +92,20 @@ public class DialogActivity extends AppCompatActivity {
                 }).create();
         alert.show();
     }
+
+    //普通列表对话框
+    public void commonListDialog(){
+        final String[] person = new String[] {"唐三藏","孙悟空","猪八戒","沙和尚"};
+        alert = null;
+        builder = new AlertDialog.Builder(DialogActivity.this);
+        alert = builder.setIcon(R.mipmap.ic_bug)
+                .setTitle("选择你喜欢的人物")
+                .setItems(person, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(DialogActivity.this,"你选择的是"+person[i],Toast.LENGTH_SHORT).show();
+                    }
+                }).create();
+        alert.show();
+    }
 }
