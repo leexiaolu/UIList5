@@ -58,6 +58,7 @@ public class DialogActivity extends AppCompatActivity {
 
                 break;
             case R.id.bt_dialog7:
+
                 break;
         }
     }
