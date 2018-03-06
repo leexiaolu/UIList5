@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.bt_dialog:
+                intent = new Intent(MainActivity.this,DialogActivity.class);
+                startActivity(intent);
                 break;
             case R.id.bt_popupwindow:
                 break;
