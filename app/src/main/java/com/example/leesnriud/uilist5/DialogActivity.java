@@ -1,7 +1,10 @@
 package com.example.leesnriud.uilist5;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -29,6 +32,30 @@ public class DialogActivity extends AppCompatActivity {
     private View custom_dialog;
     private AlertDialog alert = null;
     private AlertDialog.Builder builder = null;
+    private ProgressDialog pd2;
+    private final static int MAXVALUE = 100;
+    private int progressStart = 0;
+    private int add = 0;
+
+
+    //定义一个用于更新进度的Handler,因为只能由主线程更新界面,所以要用Handler传递信息
+    final Handler handler = new Handler()
+    {
+        @Override
+        public void handleMessage(Message msg) {
+            //这里的话如果接受到信息码是123
+            if(msg.what == 123)
+            {
+                //设置进度条的当前值
+                pd2.setProgress(progressStart);
+            }
+            //如果当前大于或等于进度条的最大值,调用dismiss()方法关闭对话框
+            if(progressStart >= MAXVALUE)
+            {
+                pd2.dismiss();
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +81,7 @@ public class DialogActivity extends AppCompatActivity {
                 checkboxListDialog();
                 break;
             case R.id.bt_dialog5:
-
+                progressbarDialog();
                 break;
             case R.id.bt_dialog6:
 
@@ -158,7 +185,34 @@ public class DialogActivity extends AppCompatActivity {
 
     //进度条对话框
     public void progressbarDialog(){
-
+        //初始化
+        progressStart = 0;
+        add = 0;
+        //设置一些属性
+        pd2 = new ProgressDialog(DialogActivity.this);
+        pd2.setMax(MAXVALUE);
+        pd2.setTitle("下载中");
+        pd2.setMessage("文件下载中,请稍后...");
+        //设置为不可以通过按取消按钮关闭进度条
+        pd2.setCancelable(false);
+        pd2.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+        //设置的是是否显示进度,设为false才是显示的！！！
+        pd2.setIndeterminate(false);
+        pd2.show();
+        //新建一个线程,重写run()方法
+        new Thread()
+        {
+            public void run()
+            {
+                while(progressStart < MAXVALUE)
+                {
+                    //这里是决定进度条变化
+                    progressStart = 2 * usetime() ;
+                    //把信息码发送给handle让更新界面
+                    handler.sendEmptyMessage(123);
+                }
+            }
+        }.start();
     }
 
     //日期选择对话框
@@ -200,4 +254,14 @@ public class DialogActivity extends AppCompatActivity {
         });
     }
 
+    //设置一个耗时的方法:
+    private int usetime() {
+        add++;
+        try{
+            Thread.sleep(100);
+        }catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return add;
+    }
 }
