@@ -4,6 +4,8 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,7 +26,7 @@ import butterknife.OnClick;
 public class DialogActivity extends AppCompatActivity {
 
     private boolean[] checkItems;
-
+    private View custom_dialog;
     private AlertDialog alert = null;
     private AlertDialog.Builder builder = null;
 
@@ -58,7 +60,7 @@ public class DialogActivity extends AppCompatActivity {
 
                 break;
             case R.id.bt_dialog7:
-
+                customDialog();
                 break;
         }
     }
@@ -166,7 +168,36 @@ public class DialogActivity extends AppCompatActivity {
 
     //自定义对话框
     public void customDialog(){
+        alert = null;
+        builder = new AlertDialog.Builder(DialogActivity.this);
+        final LayoutInflater inflater = getLayoutInflater();
+        custom_dialog = inflater.inflate(R.layout.view_dialog_custom,null,false);
+        builder.setView(custom_dialog);
+        builder.setCancelable(false);
+        alert = builder.create();
+        alert.show();
 
+        custom_dialog.findViewById(R.id.btn_cancle).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                alert.dismiss();
+            }
+        });
+
+        custom_dialog.findViewById(R.id.btn_enter).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DialogActivity.this,"确定",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        custom_dialog.findViewById(R.id.btn_close).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DialogActivity.this,"关闭",Toast.LENGTH_SHORT).show();
+                alert.dismiss();
+            }
+        });
     }
 
 }
