@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".ToastActivity" />
         <activity android:name=".DialogActivity" />
-        <activity android:name=".PopupwindowActivity"></activity>
     </application>
 
 </manifest>
