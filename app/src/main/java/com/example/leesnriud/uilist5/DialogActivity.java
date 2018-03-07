@@ -46,10 +46,10 @@ public class DialogActivity extends AppCompatActivity {
                 commonListDialog();
                 break;
             case R.id.bt_dialog3:
-
+                radiobuttonListDialog();
                 break;
             case R.id.bt_dialog4:
-
+                checkboxListDialog();
                 break;
             case R.id.bt_dialog5:
 
@@ -108,4 +108,65 @@ public class DialogActivity extends AppCompatActivity {
                 }).create();
         alert.show();
     }
+
+    //单选列表对话框
+    public void radiobuttonListDialog(){
+        final String[] num = new String[]{"1","2","3","4","5"};
+        alert = null;
+        builder = new AlertDialog.Builder(DialogActivity.this);
+        alert = builder.setIcon(R.mipmap.ic_bug)
+                .setTitle("选择你喜欢的一个数字")
+                .setSingleChoiceItems(num, 0, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        Toast.makeText(DialogActivity.this,"你喜欢的数字是"+num[i],Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .create();
+        alert.show();
+    }
+
+    //多选列表对话框
+    public void checkboxListDialog(){
+        final String[] menu = new String[]{"111","222","333","444"};
+        checkItems = new boolean[]{false,false,false,false};
+        alert = null;
+        builder = new AlertDialog.Builder(DialogActivity.this);
+        alert = builder.setIcon(R.mipmap.ic_bug)
+                .setMultiChoiceItems(menu, checkItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i, boolean isChecked) {
+                        checkItems[i] = isChecked;
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int which) {
+                        String result = "";
+                        for (int i = 0; i < checkItems.length; i++) {
+                            if (checkItems[i])
+                                result += menu[i] + " ";
+                        }
+                        Toast.makeText(DialogActivity.this, "你点了:" + result, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .create();
+        alert.show();
+    }
+
+    //进度条对话框
+    public void progressbarDialog(){
+
+    }
+
+    //日期选择对话框
+    public void timeDialog(){
+
+    }
+
+    //自定义对话框
+    public void customDialog(){
+
+    }
+
 }
