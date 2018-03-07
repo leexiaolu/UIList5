@@ -48,6 +48,12 @@
             android:layout_height="wrap_content" />
         <Button
             android:id="@+id/bt_dialog7"
+            android:text="带时间选择的dialog"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/bt_dialog8"
             android:text="自定义dialog"
             android:layout_margin="5dp"
             android:layout_width="match_parent"

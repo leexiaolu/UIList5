@@ -1,16 +1,21 @@
 package com.example.leesnriud.uilist5;
 
+import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -36,6 +41,7 @@ public class DialogActivity extends AppCompatActivity {
     private final static int MAXVALUE = 100;
     private int progressStart = 0;
     private int add = 0;
+    private String result;
 
 
     //定义一个用于更新进度的Handler,因为只能由主线程更新界面,所以要用Handler传递信息
@@ -65,7 +71,7 @@ public class DialogActivity extends AppCompatActivity {
 
     }
 
-    @OnClick({R.id.bt_dialog1, R.id.bt_dialog2, R.id.bt_dialog3, R.id.bt_dialog4, R.id.bt_dialog5, R.id.bt_dialog6, R.id.bt_dialog7})
+    @OnClick({R.id.bt_dialog1, R.id.bt_dialog2, R.id.bt_dialog3, R.id.bt_dialog4, R.id.bt_dialog5, R.id.bt_dialog6, R.id.bt_dialog7,R.id.bt_dialog8})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.bt_dialog1:
@@ -84,9 +90,12 @@ public class DialogActivity extends AppCompatActivity {
                 progressbarDialog();
                 break;
             case R.id.bt_dialog6:
-
+                datepickerDialog();
                 break;
             case R.id.bt_dialog7:
+                timepickerDialog();
+                break;
+            case R.id.bt_dialog8:
                 customDialog();
                 break;
         }
@@ -216,8 +225,33 @@ public class DialogActivity extends AppCompatActivity {
     }
 
     //日期选择对话框
-    public void timeDialog(){
+    public void datepickerDialog(){
+        Calendar cale1 = Calendar.getInstance();
+        new DatePickerDialog(DialogActivity.this,new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                  int dayOfMonth) {
+                //这里获取到的月份需要加上1
+                result += "你选择的是"+year+"年"+(monthOfYear+1)+"月"+dayOfMonth+"日";
+                Toast.makeText(DialogActivity.this, result, Toast.LENGTH_SHORT).show();
+            }
+        }
+                ,cale1.get(Calendar.YEAR)
+                ,cale1.get(Calendar.MONTH)
+                ,cale1.get(Calendar.DAY_OF_MONTH)).show();
+    }
 
+    //时间选择对话框
+    public void timepickerDialog(){
+        Calendar cale2 = Calendar.getInstance();
+        new TimePickerDialog(DialogActivity.this, new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                result = "";
+                result += "您选择的时间是:"+hourOfDay+"点"+minute+"分";
+                Toast.makeText(DialogActivity.this, result, Toast.LENGTH_SHORT).show();
+            }
+        }, cale2.get(Calendar.HOUR_OF_DAY), cale2.get(Calendar.MINUTE), true).show();
     }
 
     //自定义对话框
